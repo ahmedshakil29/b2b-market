@@ -105,9 +105,10 @@ const Navbar = () => {
   const toggleDarkMode = () => {
     dispatch(setIsDarkMode(!isDarkMode));
   };
+  // bg-red-500
 
   return (
-    <div className="flex justify-between items-center w-full mb-7 bg-red-500">
+    <div className="flex justify-between items-center w-full mb-7">
       {/* LEFT SIDE */}
       <div className="flex justify-between items-center gap-5">
         <button
