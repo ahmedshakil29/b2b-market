@@ -1,90 +1,117 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export interface Product {
-  productId: string;
-  name: string;
-  price: number;
-  rating?: number;
-  stockQuantity: number;
-}
+// // Define the types for your data models (adjust as needed based on your JSON structure)
+// export interface Product {
+//   productId: string;
+//   name: string;
+//   price: number;
+//   rating?: number;
+//   stockQuantity: number;
+// }
 
-export interface SalesSummary {
-  salesSummaryId: string;
-  totalValue: number;
-  changePercentage?: number;
-  date: string;
-}
+// export interface User {
+//   userId: string;
+//   name: string;
+//   email: string;
+// }
 
-export interface PurchaseSummary {
-  purchaseSummaryId: string;
-  totalPurchased: number;
-  changePercentage?: number;
-  date: string;
-}
+// export interface SalesSummary {
+//   salesSummaryId: string;
+//   totalValue: number;
+//   changePercentage?: number;
+//   date: string;
+// }
 
-export interface ExpenseSummary {
-  expenseSummarId: string;
-  totalExpenses: number;
-  date: string;
-}
+// export interface PurchaseSummary {
+//   purchaseSummaryId: string;
+//   totalPurchased: number;
+//   changePercentage?: number;
+//   date: string;
+// }
 
-export interface ExpenseByCategorySummary {
-  expenseByCategorySummaryId: string;
-  category: string;
-  amount: string;
-  date: string;
-}
+// export interface ExpenseSummary {
+//   expenseSummarId: string;
+//   totalExpenses: number;
+//   date: string;
+// }
 
-export interface User {
-  userId: string;
-  name: string;
-  email: string;
-}
+// export interface ExpenseByCategorySummary {
+//   expenseByCategorySummaryId: string;
+//   category: string;
+//   amount: string;
+//   date: string;
+// }
 
-export const api2 = createApi({
-  reducerPath: "api2",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }), // 👈 local API route
-  tagTypes: [
-    "Products",
-    "SalesSummary",
-    "PurchaseSummary",
-    "ExpenseSummary",
-    "ExpenseByCategory",
-    "Users",
-  ],
-  endpoints: (build) => ({
-    getProducts: build.query<Product[], void>({
-      query: () => "/products",
-      providesTags: ["Products"],
-    }),
-    getSalesSummary: build.query<SalesSummary[], void>({
-      query: () => "/salesSummary",
-      providesTags: ["SalesSummary"],
-    }),
-    getPurchaseSummary: build.query<PurchaseSummary[], void>({
-      query: () => "/purchaseSummary",
-      providesTags: ["PurchaseSummary"],
-    }),
-    getExpenseSummary: build.query<ExpenseSummary[], void>({
-      query: () => "/expenseSummary",
-      providesTags: ["ExpenseSummary"],
-    }),
-    getExpenseByCategory: build.query<ExpenseByCategorySummary[], void>({
-      query: () => "/expenseByCategory",
-      providesTags: ["ExpenseByCategory"],
-    }),
-    getUsers: build.query<User[], void>({
-      query: () => "/users",
-      providesTags: ["Users"],
-    }),
-  }),
-});
+// // Create the API using Redux Toolkit Query
+// export const api2 = createApi({
+//   baseQuery: fetchBaseQuery({
+//     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL, // Update base URL if needed
+//   }),
+//   reducerPath: "api2", // Name of the reducer slice for this API
+//   tagTypes: [
+//     "Products",
+//     "Users",
+//     "SalesSummary",
+//     "PurchaseSummary",
+//     "ExpenseSummary",
+//     "ExpenseByCategory",
+//   ],
+//   endpoints: (build) => ({
+//     // Fetch products
+//     getProducts: build.query<Product[], void>({
+//       query: () => "/api/products", // Matches route: /src/api/products/route.ts
+//       providesTags: ["Products"], // Tags to invalidate cache when needed
+//     }),
 
-export const {
-  useGetProductsQuery,
-  useGetSalesSummaryQuery,
-  useGetPurchaseSummaryQuery,
-  useGetExpenseSummaryQuery,
-  useGetExpenseByCategoryQuery,
-  useGetUsersQuery,
-} = api2;
+//     // Fetch users
+//     getUsers: build.query<User[], void>({
+//       query: () => "/api/users", // Matches route: /src/api/users/route.ts
+//       providesTags: ["Users"],
+//     }),
+
+//     // Fetch sales summary
+//     getSalesSummary: build.query<SalesSummary[], void>({
+//       query: () => "/api/salesSummary", // Matches route: /src/api/salesSummary/route.ts
+//       providesTags: ["SalesSummary"],
+//     }),
+
+//     // Fetch purchase summary
+//     getPurchaseSummary: build.query<PurchaseSummary[], void>({
+//       query: () => "/api/purchaseSummary", // Matches route: /src/api/purchaseSummary/route.ts
+//       providesTags: ["PurchaseSummary"],
+//     }),
+
+//     // Fetch expense summary
+//     getExpenseSummary: build.query<ExpenseSummary[], void>({
+//       query: () => "/api/expenseSummary", // Matches route: /src/api/expenseSummary/route.ts
+//       providesTags: ["ExpenseSummary"],
+//     }),
+
+//     // Fetch expense by category
+//     getExpenseByCategory: build.query<ExpenseByCategorySummary[], void>({
+//       query: () => "/api/expenseByCategory", // Matches route: /src/api/expenseByCategory/route.ts
+//       providesTags: ["ExpenseByCategory"],
+//     }),
+
+//     // Add a new product
+//     createProduct: build.mutation<Product, Product>({
+//       query: (newProduct) => ({
+//         url: "/api/products", // Matches route: /src/api/products/route.ts
+//         method: "POST",
+//         body: newProduct,
+//       }),
+//       invalidatesTags: ["Products"], // Invalidate the cache to refresh data
+//     }),
+//   }),
+// });
+
+// // Export the hooks generated by createApi for usage in components
+// export const {
+//   useGetProductsQuery,
+//   useGetUsersQuery,
+//   useGetSalesSummaryQuery,
+//   useGetPurchaseSummaryQuery,
+//   useGetExpenseSummaryQuery,
+//   useGetExpenseByCategoryQuery,
+//   useCreateProductMutation,
+// } = api2;
